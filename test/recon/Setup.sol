@@ -21,5 +21,8 @@ abstract contract Setup is BaseSetup {
     function setup() internal virtual override {
         maliciousInitiative = new MaliciousInitiative();
         initiative = IInitiative(address(maliciousInitiative)); 
+
+        // sets an example out of gas revert reason on the Initiative
+        maliciousInitiative.setRevertBehaviour(MaliciousInitiative.FunctionType.ALLOCATE, MaliciousInitiative.RevertType.OOG);
     }
 }
