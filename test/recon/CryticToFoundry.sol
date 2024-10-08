@@ -2,9 +2,12 @@
 // SPDX-License-Identifier: GPL-2.0
 pragma solidity ^0.8.0;
 
-import {Test} from "forge-std/Test.sol";
-import {TargetFunctions} from "./TargetFunctions.sol";
 import {FoundryAsserts} from "@chimera/FoundryAsserts.sol";
+import {Test} from "forge-std/Test.sol";
+
+import {TargetFunctions} from "./TargetFunctions.sol";
+import {MaliciousInitiative} from "./mocks/MaliciousInitiative.sol";
+
 
 contract CryticToFoundry is Test, TargetFunctions, FoundryAsserts {
     function setUp() public {
@@ -21,6 +24,7 @@ contract CryticToFoundry is Test, TargetFunctions, FoundryAsserts {
     }
 
     function test_initiative_onAfterAllocateLQTY() public {
+        maliciousInitiative.setRevertBehaviour(MaliciousInitiative.FunctionType.ALLOCATE, MaliciousInitiative.RevertType.OOG);
         initiative_onAfterAllocateLQTY(5, address(0x101112), uint88(10), uint88(15));
     }
 
