@@ -31,19 +31,19 @@ contract Initiative is IInitiative {
     }
 
     function onRegisterInitiative(uint16 _atEpoch) external override onlyGovernance {
-      // revert("TODO onRegisterInitiative");
+      revert("TODO onRegisterInitiative");
     }
 
     function onUnregisterInitiative(uint16 _atEpoch) external override onlyGovernance {
-      // revert("TODO onUnregisterInitiative");
+      revert("TODO onUnregisterInitiative");
     }
 
 
     function onAfterAllocateLQTY(uint16 _currentEpoch, address _user, IGovernance.UserState calldata userState, IGovernance.Allocation calldata allocation, IGovernance.InitiativeState calldata initiativeState) external override onlyGovernance {
-      // revert("TODO onAfterAllocateLQTY");
+      revert("TODO onAfterAllocateLQTY");
     }
 
     function onClaimForInitiative(uint16 _claimEpoch, uint256 _bold) external override onlyGovernance {
-      // revert("TODO onClaimForInitiative");
+      revert("TODO onClaimForInitiative");
     }
 }
