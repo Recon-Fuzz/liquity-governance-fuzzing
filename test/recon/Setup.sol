@@ -12,10 +12,7 @@ abstract contract Setup is BaseSetup {
 
     Initiative initiative; // TODO IInitiative is not great
 
-    address actor = address(this);
-    address dummyBold = address(0x123);
-    address dummyBribe = address(0x456);
-
+    // TODO: Update these values
     address constant MAINNET_GOVERNANCE = address(0x1233); // TODO: Ensure it's always correct, via Gov Fuzzing or hardcoded
     address constant MAINNET_BOLD = address(0x1233); // TODO: Ensure it's always correct, via Gov Fuzzing or hardcoded
 

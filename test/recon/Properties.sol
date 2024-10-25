@@ -7,10 +7,10 @@ import {Setup} from "./Setup.sol";
 
 abstract contract Properties is Setup, Asserts {
   function check_is_using_bold() public {
-    address(initiative.bold()) == MAINNET_BOLD; // HARDCODE HERE
+    address(initiative.bold()) == MAINNET_BOLD;
   }
 
   function check_governance() public {
-    initiative.governance() == MAINNET_GOVERNANCE; // HARDCODE HERE
+    initiative.governance() == MAINNET_GOVERNANCE;
   }
 }
