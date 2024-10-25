@@ -6,11 +6,12 @@ import {BaseSetup} from "@chimera/BaseSetup.sol";
 import {IInitiative} from "governance/interfaces/IInitiative.sol";
 
 import {Initiative} from "src/Initiative.sol";
+import {vm} from "@chimera/Hevm.sol";
 
 abstract contract Setup is BaseSetup {
     Initiative initiative; // TODO IInitiative is not great, we should update it a bit
 
-    // TODO: Update these values
+    // TODO: Update these values | OR use Dynamic Replacement
     address constant MAINNET_GOVERNANCE = address(0);
     address constant MAINNET_BOLD = address(0);
 
@@ -24,5 +25,14 @@ abstract contract Setup is BaseSetup {
         // NOTE: Liquity could create a Interface and use that via EIP-165
         // Alternatively, we would ask an AI to check this
         // But that's not exactly easy to do
+    }
+
+    function setupFork() internal virtual {
+        vm.warp(123);
+        vm.roll(123);
+
+        // NOTE: Declared this way for Governance Fuzzing
+        address INITIATIVE_TO_TEST = address(0x123123);
+        initiative = Initiative(INITIATIVE_TO_TEST);
     }
 }
