@@ -1,4 +1,3 @@
-
 // SPDX-License-Identifier: GPL-2.0
 pragma solidity ^0.8.0;
 
@@ -14,48 +13,64 @@ import {safeCallWithMinGas} from "governance/utils/SafeCallMinGas.sol";
 abstract contract TargetFunctions is BaseTargetFunctions, Properties, BeforeAfter {
     bool prankingGovernance = true;
 
-    function togglePrankGovernance() public{
+    function togglePrankGovernance() public {
         prankingGovernance = !prankingGovernance;
     }
 
     // Test doesn't revert
     function initiative_onRegisterInitiative(uint16 epoch) public {
-        if(prankingGovernance) {
+        if (prankingGovernance) {
             vm.prank(MAINNET_GOVERNANCE);
         }
 
-        bool callWithMinGas = safeCallWithMinGas(address(initiative), MIN_GAS_TO_HOOK, 0, abi.encodeCall(IInitiative.onRegisterInitiative, (epoch)));
+        bool callWithMinGas = safeCallWithMinGas(
+            address(initiative), MIN_GAS_TO_HOOK, 0, abi.encodeCall(IInitiative.onRegisterInitiative, (epoch))
+        );
 
-
-        if(prankingGovernance) {
+        if (prankingGovernance) {
             t(callWithMinGas, "call to onRegisterInitiative reverts with minimum gas");
         } else {
             t(!callWithMinGas, "Unathenticated call MUST fail");
         }
     }
-    
+
     function intiative_onUnregisterInitiative(uint16 epoch) public {
-        if(prankingGovernance) {
+        if (prankingGovernance) {
             vm.prank(MAINNET_GOVERNANCE);
         }
 
-        bool callWithMinGas = safeCallWithMinGas(address(initiative), MIN_GAS_TO_HOOK, 0, abi.encodeCall(IInitiative.onUnregisterInitiative, (epoch)));
-    
-        if(prankingGovernance) {
+        bool callWithMinGas = safeCallWithMinGas(
+            address(initiative), MIN_GAS_TO_HOOK, 0, abi.encodeCall(IInitiative.onUnregisterInitiative, (epoch))
+        );
+
+        if (prankingGovernance) {
             t(callWithMinGas, "call to onUnregisterInitiative reverts with minimum gas");
         } else {
             t(!callWithMinGas, "Unathenticated call MUST fail");
         }
     }
-    
-    function initiative_onAfterAllocateLQTY(uint16 currentEpoch, address user, IGovernance.UserState memory userState, IGovernance.Allocation memory allocation, IGovernance.InitiativeState memory initiativeState) public {
-        if(prankingGovernance) {
+
+    function initiative_onAfterAllocateLQTY(
+        uint16 currentEpoch,
+        address user,
+        IGovernance.UserState memory userState,
+        IGovernance.Allocation memory allocation,
+        IGovernance.InitiativeState memory initiativeState
+    ) public {
+        if (prankingGovernance) {
             vm.prank(MAINNET_GOVERNANCE);
         }
 
-        bool callWithMinGas = safeCallWithMinGas(address(initiative), MIN_GAS_TO_HOOK, 0, abi.encodeCall(IInitiative.onAfterAllocateLQTY, (currentEpoch, user, userState, allocation, initiativeState)));
+        bool callWithMinGas = safeCallWithMinGas(
+            address(initiative),
+            MIN_GAS_TO_HOOK,
+            0,
+            abi.encodeCall(
+                IInitiative.onAfterAllocateLQTY, (currentEpoch, user, userState, allocation, initiativeState)
+            )
+        );
 
-        if(prankingGovernance) {
+        if (prankingGovernance) {
             t(callWithMinGas, "call to onAfterAllocateLQTY reverts with minimum gas");
         } else {
             t(!callWithMinGas, "Unathenticated call MUST fail");
@@ -63,19 +78,23 @@ abstract contract TargetFunctions is BaseTargetFunctions, Properties, BeforeAfte
     }
 
     function initiative_onClaimForInitiative(uint16 claimEpoch, uint256 bold) public {
-        if(prankingGovernance) {
+        if (prankingGovernance) {
             vm.prank(MAINNET_GOVERNANCE);
         }
 
-        bool callWithMinGas = safeCallWithMinGas(address(initiative), MIN_GAS_TO_HOOK, 0, abi.encodeCall(IInitiative.onClaimForInitiative, (claimEpoch, bold)));
+        bool callWithMinGas = safeCallWithMinGas(
+            address(initiative),
+            MIN_GAS_TO_HOOK,
+            0,
+            abi.encodeCall(IInitiative.onClaimForInitiative, (claimEpoch, bold))
+        );
 
-        if(prankingGovernance) {
+        if (prankingGovernance) {
             t(callWithMinGas, "call to onClaimForInitiative reverts with minimum gas");
         } else {
             t(!callWithMinGas, "Unathenticated call MUST fail");
         }
     }
-
 
     // Extra checks
     // If the Initiative is a BribesInitiative, then it must comply with the params from the Interface and Spec
