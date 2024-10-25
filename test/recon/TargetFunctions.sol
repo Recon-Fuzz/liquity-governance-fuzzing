@@ -27,6 +27,7 @@ abstract contract TargetFunctions is BaseTargetFunctions, Properties, BeforeAfte
             address(initiative), MIN_GAS_TO_HOOK, 0, abi.encodeCall(IInitiative.onRegisterInitiative, (epoch))
         );
 
+        // calls made by governance should never fail, calls not made by governance should always fail
         if (prankingGovernance) {
             t(callWithMinGas, "call to onRegisterInitiative reverts with minimum gas");
         } else {

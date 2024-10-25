@@ -15,4 +15,9 @@ contract CryticToFoundry is Test, TargetFunctions, FoundryAsserts {
     function test_basic() public {
         console.log("test works");
     }
+
+    // reverts because Initiative contract is still not finalized so all functions revert by default
+    function test_registering() public {
+        initiative_onRegisterInitiative(3);
+    }
 }
