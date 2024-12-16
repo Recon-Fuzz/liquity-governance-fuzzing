@@ -38,10 +38,9 @@ echidna . --contract CryticTester --config echidna.yaml
 
 ### ADVANCED: Run Echidna Fork Invariant Tests
 
-TODO: Prob missing smth about the RPC
 
 ```
-echidna . --contract ForkTester --config echidna.yaml
+ECHIDNA_RPC_URL=YOUR_URL ECHIDNA_RPC_BLOCK=BLOCK echidna . --contract CryticForkTester --config echidna.yaml
 ```
 
 
@@ -55,8 +54,33 @@ To test it after deployment, run `Echidna` in fork Mode
 
 ## Using Recon Pro
 
+## Run a Fork Test on Recon Pro
+
+Create a Job with Dynamic Replacement
+
+Paste the Repo GH Url
+
+Select Echidna
+
+Toggle Fork Mode, either pick one pre setup chain or paste your RPC URL
+
+![Set Fork Mode](./.github/images/dynamic-block.png "Set Fork Mode")
+
+Toggle Dynamic Block Replacement so that we'll run your fork test against the latest available block
+
+![Dynamic Block](./.github/images/fork-mode.png "Toggle Dynamic Block Replacement")
+
+
+To test against a specific Initiative setup dynamic replacement as follows:
+- Variable Name: INITIATIVE_TO_TEST
+- Interface: address
+- Value: address to thes (e.g. 0x1231231233)
+
+![Dynamic Variable Replacement](./.github/images/dynamic-variable.png "Dynamic Variable Replacement")
+
 ## Governance Fuzzing and Ongoing Monitorign
 
+Talk to us to setup automated Gov Fuzzing Runs whenever a new initiative is deployed
 
 ## Implemented Tests
 
