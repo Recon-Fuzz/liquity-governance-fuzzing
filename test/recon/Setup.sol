@@ -20,11 +20,7 @@ abstract contract Setup is BaseSetup {
     function setup() internal virtual override {
         initiative = new Initiative(MAINNET_GOVERNANCE, MAINNET_BOLD);
 
-        // Is this a BribeInitiative?
-        // can be determined by checking for a few functions
-        // NOTE: Liquity could create a Interface and use that via EIP-165
-        // Alternatively, we would ask an AI to check this
-        // But that's not exactly easy to do
+        // NOTE: Liquity could create a Interface and verify it via EIP-165
     }
 
     function setupFork() internal virtual {
